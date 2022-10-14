@@ -29,7 +29,14 @@ void ShowArray(const int* const arr, const int size)
 
 void push_in(int*& arr, int& size, const int value)
 {
-
+    int* newArray = new int[size + 1];
+    
+    for (int a = 0; a < size; a++)
+    {
+        newArray[a] = arr[a];
+    }
+    
+    newArray[size] = value;
 }
 
 int main()
