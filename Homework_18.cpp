@@ -23,7 +23,7 @@ void ShowArray(const int* const arr, const int size)
     {
         cout << arr[a] << '\t';
     }
-
+    cout << '\n';
 }
 
 
@@ -36,16 +36,45 @@ void push_in(int*& arr, int& size, const int value)
         newArray[a] = arr[a];
     }
     
-    newArray[size] = value;
+    newArray[size++] = value;
+
+    delete[] arr;
+
+    arr = newArray;
+}
+
+void pop_in(int*& arr, int& size)
+{
+    size--;
+    int *newArray = new int[size];
+    
+    for (int a = 0; a < size; a++)
+    {
+        newArray[a] = arr[a];
+    }
+
+    delete[] arr;
+
+    arr = newArray;
+
 }
 
 int main()
 {
     int size = 6;
     int* arr = new int[size];
+    
     FullArray(arr, size);
+    
     ShowArray(arr, size);
 
+    push_in(arr, size, 999);
+
+    ShowArray(arr, size);
+
+    pop_in(arr, size);
+
+    ShowArray(arr, size);
 
 
 
