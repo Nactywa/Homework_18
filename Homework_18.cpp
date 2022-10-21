@@ -34,48 +34,48 @@ public:
     {
 
     }
-}
 
 
-void push_in(AnyType value)
-{
-    AnyType* newArray = new AnyType[size + 1];
-    cout << "Add Element " << value << endl;
 
-    for (int a = 0; a < size; a++)
+    void push_in(AnyType value)
     {
-        newArray[a] = StackArray[a];
+        AnyType* newArray = new AnyType[size + 1];
+        cout << "Add Element " << value << endl;
+
+        for (int a = 0; a < size; a++)
+        {
+            newArray[a] = StackArray[a];
+        }
+
+        newArray [size] = value;
+
+        delete[] StackArray;
+        size++;
+        StackArray = newArray;
     }
 
-    newArray[size++] = value;
-
-    delete[] StackArray;
-    size++;
-    StackArray = newArray;
-}
-
-void pop_in()
-{
-
-    size--;
-
-}
-
-void Print()
-{
-    for (int a = 0; a < size; a++)
+    void pop_in()
     {
-        cout << *(StackArray + a) << "";
+
+        size--;
+
     }
-    std::cout << std::endl;
-}
 
-void Delete()
-{
-    delete[] StackArray;
+    void Print()
+    {
+        for (int a = 0; a < size; a++)
+        {
+            cout << *(StackArray + a) << "";
+        }
+        std::cout << std::endl;
+    }
 
-}
+    void Delete()
+    {
+        delete[] StackArray;
 
+    }
+};
 
 
 
