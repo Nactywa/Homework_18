@@ -1,82 +1,120 @@
 ﻿// Homework_18.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
+#define __CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
 
 #include <iostream>
+#include <string>
+
+
+
+using std::string;
 using namespace std;
 
 
 
-void FullArray(int* const arr, const int size)
+template <class AnyType>
+class Stack
 {
-    for (int a = 0; a < size; a++)
+private:
+
+    AnyType* StackArray = NULL;
+    int size = 0;
+
+public:
+
+    Stack()
     {
-        arr[a] = rand() % 10;
+
     }
 
+    ~Stack()
+    {
 
+    }
 }
 
 
-void ShowArray(const int* const arr, const int size)
+void push_in(AnyType value)
 {
+    AnyType* newArray = new AnyType[size + 1];
+    cout << "Add Element " << value << endl;
+
     for (int a = 0; a < size; a++)
     {
-        cout << arr[a] << '\t';
+        newArray[a] = StackArray[a];
     }
-    cout << '\n';
-}
 
-
-void push_in(int*& arr, int& size, const int value)
-{
-    int* newArray = new int[size + 1];
-    
-    for (int a = 0; a < size; a++)
-    {
-        newArray[a] = arr[a];
-    }
-    
     newArray[size++] = value;
 
-    delete[] arr;
-
-    arr = newArray;
+    delete[] StackArray;
+    size++;
+    StackArray = newArray;
 }
 
-void pop_in(int*& arr, int& size)
+void pop_in()
 {
+
     size--;
-    int *newArray = new int[size];
-    
+
+}
+
+void Print()
+{
     for (int a = 0; a < size; a++)
     {
-        newArray[a] = arr[a];
+        cout << *(StackArray + a) << "";
     }
+    std::cout << std::endl;
+}
 
-    delete[] arr;
-
-    arr = newArray;
+void Delete()
+{
+    delete[] StackArray;
 
 }
+
+
+
 
 int main()
 {
-    int size = 6;
-    int* arr = new int[size];
-    
-    FullArray(arr, size);
-    
-    ShowArray(arr, size);
+    Stack <int> INTStack;
+    Stack <string> STRINGStack;
 
-    push_in(arr, size, 999);
+    INTStack.push_in(9);
+    INTStack.push_in(8);
+    INTStack.push_in(7);
+    INTStack.push_in(6);
+    INTStack.push_in(5);
 
-    ShowArray(arr, size);
+    INTStack.Print();
+    INTStack.pop_in();
+    INTStack.Print();
+    INTStack.pop_in();
+    INTStack.Print();
+    INTStack.pop_in();
+    INTStack.Print();
+    INTStack.push_in(8);
+    INTStack.Print();
+    INTStack.Delete();
 
-    pop_in(arr, size);
+    cout << "  -----------" << endl;
 
-    ShowArray(arr, size);
+    STRINGStack.push_in("Test:0");
+    STRINGStack.push_in("Test:1");
+    STRINGStack.push_in("Test:2");
+    STRINGStack.push_in("Test:3");
+    STRINGStack.push_in("Test:4");
+    STRINGStack.pop_in();
+    STRINGStack.Print();
+    STRINGStack.pop_in();
+    STRINGStack.Print();
+    STRINGStack.push_in("itsWork:1");
+    STRINGStack.Print();
+    STRINGStack.Delete();
 
 
-
-    delete[] arr;
 }
